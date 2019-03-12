@@ -5,26 +5,73 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Dictionary - {{ word_data.word_text }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Style components -->
+    <style>
+        .meaning-box {
+            margin: 100px;
+            padding: 20px;
+            border: 1px solid black;
+            border-radius: 10px;
+        }
+
+        .word-header {
+            font-size: 50px;
+            font-family: Arial;
+            /* color: blueviolet; */
+            text-align: center;
+        }
+
+        .meaning {
+            font-size: 30px;
+            font-family: Arial, sans-serif;
+            /* color: blue; */
+            text-align: center;
+        }
+
+        .related-words {
+            text-align: center;
+            border: 1px solid black;
+            border-radius: 10px;
+            /* padding: 20px; */
+            padding-bottom: 20px;
+            margin-left: 400px;
+            margin-right: 400px;
+        }
+
+        .search-form {
+            text-align: center;
+        }
+        
+        .input-box {
+            text-align: center;
+            border: 2px solid black;
+            border-radius: 15px;
+            height: 30px;
+            width: 200px;
+        }
+    </style>
 </head>
 <body>
     <!-- For printing word data -->
-    {% if word_data %}
-        <h2>Word: {{ word_data.word_text }}</h2>
-        <p>Meaning: {{ word_data.word_meaning }}</p>
-        {% if word_data.related_words %}
-            <p>Some related words are: </p>
-            <ul>
-                {% for i in word_data.related_words.all %}
-                    <li><a href="/{{ i.word_text }}/">{{ i.word_text }}</a></li>
-                {% endfor %}
-            </ul>
+    <div class="meaning-box">
+        {% if word_data %}
+            <div class="word-header">{{ word_data.word_text }}</div>
+            <div class="meaning">{{ word_data.word_meaning }}</div>
+            <div class="related-words">
+                {% if word_data.related_words %}
+                    <div>Some related words are: </div>
+                        {% for i in word_data.related_words.all %}
+                            <div><a href="/{{ i.word_text }}/">{{ i.word_text }}</a></div>
+                        {% endfor %}
+                {% endif %}
+            </div>
         {% endif %}
-    {% endif %}
-
+    </div>
+    
     <!-- For searching other words -->
-    <h3>Enter the word to be searched:</h3>
-    <form action="" method="GET" >
-        <input type="text" name="input_word" placeholder="Enter word here...">
+    <form class="search-form" action="" method="GET" >
+        <input class="input-box" type="text" name="input_word" placeholder="Enter word to be searched">
     </form>
     <br>
     {% if error_message %}
