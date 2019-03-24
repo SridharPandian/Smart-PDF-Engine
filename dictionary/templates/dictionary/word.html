@@ -57,15 +57,18 @@
     <div class="meaning-box">
         {% if word_data %}
             <div class="word-header">{{ word_data.word_text }}</div>
-            <div class="meaning">{{ word_data.word_meaning }}</div>
-            <div class="related-words">
-                {% if word_data.related_words %}
-                    <div>Some related words are: </div>
-                        {% for i in word_data.related_words.all %}
-                            <div><a href="/{{ i.word_text }}/">{{ i.word_text }}</a></div>
+            <!-- <div class="meaning">{{ word_data.word_meaning }}</div> -->
+            {% if pdf_files %}
+                <div>
+                    <h3>Some related documents are: </h3>
+                        {% for i in pdf_files %}
+                            <!-- <div><a href="/{{ i.word_text }}/">{{ i.word_text }}</a></div> -->
+                            <p>
+                                <a href="../../../Unlocked search documents/{{ i.pdf_file }}" target="_blank">{{ i.pdf_file }} - {{ i.frequency }}</a>
+                            </p>
                         {% endfor %}
-                {% endif %}
-            </div>
+                </div>
+            {% endif %}
         {% endif %}
     </div>
     
