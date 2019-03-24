@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 
-from django.http import Http404
-
+from django.http import Http404, FileResponse
+from reportlab.pdfgen import canvas
 from .models import *
 
 def search(request):
@@ -32,3 +32,10 @@ def word_detail(request, word):
                     pdf_files[i] = pdf_files[j]
                     pdf_files[j] = temp
     return render(request, 'dictionary/word.html', {'word_data': word_data, 'pdf_files': pdf_files})
+
+def pdf_openner(request, document):
+    # doc = "D:/Semantics/Unlocked search documents/"+ document
+    try:
+        return FileResponse(open('D:/Semantics/Unlocked search documents/' + document, 'rb'), content_type='application/pdf')
+    except FileNotFoundError:
+        raise Http404()
