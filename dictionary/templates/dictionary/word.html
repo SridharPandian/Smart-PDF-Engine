@@ -8,18 +8,61 @@
 
     <!-- Style components -->
     <style>
-        .meaning-box {
-            margin: 100px;
-            padding: 20px;
-            border: 1px solid black;
+        body {
+            background: #b2ebf2;
+        }
+        .title-box {
+            border: 1px solid #00bcd4;
+            background: #00bcd4;
             border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+            margin-left: 150px;
+            margin-right: 150px;
+            padding: 5px;
         }
 
-        .word-header {
-            font-size: 50px;
-            font-family: Arial;
+        .title-inside-box {
+            border: 1px solid black;
+            overflow: hidden;
+            border-color: #00bcd4;
+            background: #4dd0e1;
+            border-radius: 6px;
+            padding: 10px;
+        }
+
+        .title {
+            float: left;
+            /* margin-left: 10px; */
+            font-size: 30px;
+            font-family: 'Trebuchet MS';
+        }
+
+        .search-form {
+            float: right;
+        }
+        
+        .meaning-box {
+            margin-right: 150px;
+            margin-left: 150px;
+            margin-top: 20px;
+            padding: 5px;
+            border: 1px solid #00bcd4;
+            background: #00bcd4;
+            border-radius: 10px;
+        }
+        .meaning-inner-box {
+            border: 1px solid black;
+            border-radius: 6px;
+            padding: 20px;
+            border-color: #00bcd4;
+            background: #4dd0e1;
+        }
+        .word-searched {
+            font-size: 30px;
+            font-family: Trebuchet MS;
             /* color: blueviolet; */
-            text-align: center;
+            /* text-align: center; */
         }
 
         .meaning {
@@ -29,53 +72,55 @@
             text-align: center;
         }
 
-        .related-words {
-            text-align: center;
-            border: 1px solid black;
-            border-radius: 10px;
-            /* padding: 20px; */
-            padding-bottom: 20px;
-            margin-left: 400px;
-            margin-right: 400px;
-        }
-
-        .search-form {
-            text-align: center;
-        }
-        
         .input-box {
             text-align: center;
-            border: 2px solid black;
-            border-radius: 15px;
+            border: 2px solid #0097a7;            border-radius: 15px;
             height: 30px;
             width: 200px;
+        }
+        .search-span {
+            font-family: 'Trebuchet MS';
+            font-size: 20px;
+            /* margin-bottom:-10px; */
         }
     </style>
 </head>
 <body>
     <!-- For printing word data -->
+    <div class="title-box">
+        <div class="title-inside-box">
+            <div class="title">Smart Engine</div>
+            <div class="search-form">
+                <form action="" method="GET" >
+                    <span class="search-span">Search: <input class="input-box" type="text" name="input_word" placeholder="Enter word to be searched"></span>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="meaning-box">
-        {% if word_data %}
-            <div class="word-header">{{ word_data.word_text }}</div>
-            <!-- <div class="meaning">{{ word_data.word_meaning }}</div> -->
-            {% if pdf_files %}
-                <div>
-                    <h3>Some related documents are: </h3>
-                        {% for i in pdf_files %}
-                            <!-- <div><a href="/{{ i.word_text }}/">{{ i.word_text }}</a></div> -->
-                            <p>
-                                <a href="pdf/{{ i.pdf_file }}" target="_blank">{{ i.pdf_file }} - {{ i.frequency }}</a>
-                            </p>
-                        {% endfor %}
-                </div>
+        <div class="meaning-inner-box">
+            {% if word_data %}
+                <div class="word-searched">The keyword searched: <i>{{ word_data.word_text }}</i></div>
+                <!-- <div class="meaning">{{ word_data.word_meaning }}</div> -->
+                {% if pdf_files %}
+                <br>
+                    <div>
+                        <span class="search-span">Some related documents are: </span>
+                            {% for i in pdf_files %}
+                                <!-- <div><a href="/{{ i.word_text }}/">{{ i.word_text }}</a></div> -->
+                                <p>
+                                    <a href="pdf/{{ i.pdf_file }}" target="_blank">{{ i.pdf_file }}</a>
+                                </p>
+                            {% endfor %}
+                    </div>
+                {% endif %}
             {% endif %}
-        {% endif %}
+        </div>
     </div>
     
     <!-- For searching other words -->
-    <form class="search-form" action="" method="GET" >
-        <input class="input-box" type="text" name="input_word" placeholder="Enter word to be searched">
-    </form>
+    
     <br>
     {% if error_message %}
     <p>{{ error_message }}</p>

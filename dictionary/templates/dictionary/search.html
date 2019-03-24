@@ -3,19 +3,71 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>PDF Keyword search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
-    <script src="main.js"></script>
+
+    <style>
+        .outer-box-margin {
+            margin-top: 150px;
+            margin-left: 300px;
+            margin-right: 300px;
+            border: 1px solid black;
+            padding: 8px;
+            background: #00bcd4;
+            border-radius: 15px;
+            border-color: #00bcd4;
+        }
+        .search-name {
+            font-size: 40px;
+            font-family: Trebuchet MS;
+            text-align: center;
+        }
+        .inner-box-margin {
+            /* margin: -10px; */
+            border: 1px solid black;
+            padding: 20px;
+            /* padding-top: -10px; */
+            background: #4dd0e1;
+            border-radius: 10px;
+            border-color: #00bcd4;
+        }
+        .search-title {
+            text-align: center;
+            font-family: Trebuchet MS;
+            font-size: 30px;
+            margin-top: -10px;
+        }        
+        .input-text-box-form {
+            text-align: center;
+        }
+        .input-text-box {
+            text-align: center;
+            height: 40px;
+            width: 500px;
+            border: 2px solid #0097a7;
+            border-radius: 10px;
+            font-size: 20px;
+        }
+        body {
+            background: #b2ebf2;
+        }
+    </style>
+
 </head>
 <body>
-    <h1>Enter the word to be searched:</h1>
-    <form action=wordDetail method="GET" >
-        <input type="text" name="input_word" placeholder="Enter word here...">
-    </form>
-    <br>
-    {% if error_message %}
-    <p>{{ error_message }}</p>
-    {% endif %}
+    <div class="outer-box-margin">
+        <div class="inner-box-margin">
+            <p class="search-name">Smart Engine</p>
+            <p class="search-title">Enter the keyword to be searched:</p>
+            <form class="input-text-box-form" action=wordDetail method="GET" >
+                <input class="input-text-box" type="text" name="input_word" placeholder="Enter keyword here...">
+            </form>
+            <br>
+            {% if error_message %}
+                <p>{{ error_message }}</p>
+            {% endif %}
+        </div>
+    </div>
+    
 </body>
 </html>

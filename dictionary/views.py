@@ -34,7 +34,6 @@ def word_detail(request, word):
     return render(request, 'dictionary/word.html', {'word_data': word_data, 'pdf_files': pdf_files})
 
 def pdf_openner(request, document):
-    # doc = "D:/Semantics/Unlocked search documents/"+ document
     try:
         return FileResponse(open('D:/Semantics/Unlocked search documents/' + document, 'rb'), content_type='application/pdf')
     except FileNotFoundError:
