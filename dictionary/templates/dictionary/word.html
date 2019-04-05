@@ -82,6 +82,8 @@
         .search-span {
             font-family: 'Trebuchet MS';
             font-size: 20px;
+            padding-bottom: 5px;3
+            
             /* margin-bottom:-10px; */
         }
     </style>
@@ -116,6 +118,11 @@
                             {% endfor %}
                     </div>
                 {% endif %}
+                <div class="search-span">Some related words: </div>
+                <!-- <br /> -->
+                {% for i in dict_response %}
+                    <a href="?input_word={{ i }}">{{ i }}</a>&nbsp;&nbsp;
+                {% endfor %}
             {% endif %}
         </div>
     </div>
